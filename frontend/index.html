@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Northstar Homes | Riya AI Assistant</title>
+<link rel="stylesheet" href="/static/style.css" />
+</head>
+<body>
+  <div class="app">
+    <aside class="side">
+      <div class="brand">
+        <div class="logo">N</div>
+        <div>
+          <h1>Northstar Homes</h1>
+          <span>AI Sales Assistant</span>
+        </div>
+      </div>
+
+      <div class="project-card">
+        <h3>Northstar One</h3>
+        <p class="loc">Sector 79, Gurugram</p>
+        <div class="row"><span>2 BHK</span><span>₹1.35 Cr onwards</span></div>
+        <div class="row"><span>3 BHK</span><span>₹1.75 Cr onwards</span></div>
+      </div>
+
+      <div class="lang-pill">🌐 English · हिंदी · Hinglish</div>
+
+      <button id="endBtn" class="end-btn">View Conversation Insights</button>
+    </aside>
+
+    <main class="chat">
+      <header class="chat-header">
+        <div class="avatar">R</div>
+        <div>
+          <h2>Riya</h2>
+          <span class="status">● Online — Northstar Homes</span>
+        </div>
+      </header>
+
+      <div id="messages" class="messages"></div>
+
+      <form id="chatForm" class="chat-input">
+        <input id="msgInput" type="text" placeholder="Type your message... (English / Hindi / Hinglish)" autocomplete="off" />
+        <button id="micBtn" class="mic-btn" type="button" aria-label="Speak your message" title="Speak your message">🎙</button>
+        <button type="submit">Send</button>
+      </form>
+    </main>
+  </div>
+
+  <section id="analyticsModal" class="analytics-modal hidden" role="dialog" aria-modal="true" aria-labelledby="analyticsTitle">
+    <div class="analytics-panel">
+      <header class="analytics-header">
+        <div>
+          <span class="eyebrow">NORTHSTAR HOMES</span>
+          <h2 id="analyticsTitle">Conversation Insights</h2>
+          <p id="analyticsSubtitle">A clear view of this customer conversation</p>
+        </div>
+        <button id="analyticsClose" class="analytics-close" type="button" aria-label="Close analytics report">×</button>
+      </header>
+      <div id="analyticsContent" class="analytics-content"></div>
+    </div>
+  </section>
+
+  <script src="/static/script.js"></script>
+</body>
+</html>
