@@ -185,6 +185,18 @@ FRONTEND_DIR = Path(__file__).resolve().parent.parent / "frontend"
 app.mount("/static", StaticFiles(directory=FRONTEND_DIR), name="static")
 
 
+@app.get("/api/health")
+def health_check():
+    provider = os.getenv("LLM_PROVIDER", "openai").strip().lower()
+    key_name = "GEMINI_API_KEY" if provider == "gemini" else "OPENAI_API_KEY"
+    return {
+        "status": "ok",
+        "provider": provider,
+        "model": os.getenv("GEMINI_MODEL" if provider == "gemini" else "OPENAI_MODEL", "default"),
+        "api_key_configured": bool((os.getenv(key_name) or "").strip()),
+    }
+
+
 @app.get("/")
 def root():
     return FileResponse(FRONTEND_DIR / "index.html")

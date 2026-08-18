@@ -36,6 +36,23 @@ function removeTypingIndicator() {
   document.getElementById("typingIndicator")?.remove();
 }
 
+function showChatError(error) {
+  console.error(error);
+  if (window.location.protocol === "file:") {
+    addMessage("Please do not open index.html directly. Start the FastAPI server and open http://localhost:8000.", "bot");
+    return;
+  }
+  if (error.name === "AbortError") {
+    addMessage("The request took too long. Check that the backend is running and try again.", "bot");
+    return;
+  }
+  if (error.message?.includes("Request failed with 5")) {
+    addMessage("The backend returned an error. Check the VS Code terminal for the provider details, then restart the server.", "bot");
+    return;
+  }
+  addMessage("The backend is not reachable. Start it with: cd backend, then uvicorn main:app --reload --port 8000.", "bot");
+}
+
 function escapeHtml(value) {
   return String(value ?? "").replace(/[&<>'"]/g, (character) => ({
     "&": "&amp;",
@@ -229,8 +246,7 @@ form.addEventListener("submit", async (e) => {
       addMessage("Your site-visit details are being sent to your WhatsApp number.", "bot");
     }
   } catch (error) {
-    console.error(error);
-    addMessage("The AI service is currently unavailable. Add a valid API key in the .env file or switch LLM_PROVIDER to a working provider.", "bot");
+    showChatError(error);
   } finally {
     window.clearTimeout(requestTimeout);
     removeTypingIndicator();
