@@ -7,7 +7,8 @@ from pathlib import Path
 from dotenv import load_dotenv
 
 ROOT_DIR = Path(__file__).resolve().parent.parent
-load_dotenv(ROOT_DIR / ".env")
+# Prefer this project's .env over stale variables inherited by an IDE terminal.
+load_dotenv(ROOT_DIR / ".env", override=True)
 
 from fastapi import BackgroundTasks, FastAPI
 from fastapi.middleware.cors import CORSMiddleware
